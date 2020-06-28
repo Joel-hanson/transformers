@@ -40,6 +40,7 @@ from transformers import (
 
 logger = logging.getLogger(__name__)
 
+DEFAULT_DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 @dataclass
 class ModelArguments:
@@ -131,7 +132,7 @@ def main():
         from_tf=bool(".ckpt" in model_args.model_name_or_path),
         config=config,
         cache_dir=model_args.cache_dir,
-    )
+    ).to(DEFAULT_DEVICE)
 
     # Get datasets
     train_dataset = (

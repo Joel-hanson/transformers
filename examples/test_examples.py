@@ -69,6 +69,8 @@ class ExamplesTests(unittest.TestCase):
             --overwrite_output_dir
             --seed=42
             --max_seq_length=128
+            --fp16
+            --fp16_opt_level
             """.split()
         with patch.object(sys, "argv", testargs):
             result = run_glue.main()
