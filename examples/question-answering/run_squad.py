@@ -703,7 +703,7 @@ def main():
         args.n_gpu = 1
     args.device = device
 
-    if not is_apex_available():
+    if "cuda" not in device or not is_apex_available():
         args.fp16 = False
 
     # Setup logging
