@@ -41,6 +41,7 @@ from transformers import (
     TrainingArguments,
     set_seed,
 )
+from transformers.trainer import is_apex_available
 
 
 logger = logging.getLogger(__name__)
@@ -148,6 +149,9 @@ def main():
         raise ValueError(
             f"Output directory ({training_args.output_dir}) already exists and is not empty. Use --overwrite_output_dir to overcome."
         )
+
+    if not is_apex_available():
+        training_args.fp16 = False
 
     # Setup logging
     logging.basicConfig(

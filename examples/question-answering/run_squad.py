@@ -45,6 +45,7 @@ from transformers.data.metrics.squad_metrics import (
     squad_evaluate,
 )
 from transformers.data.processors.squad import SquadResult, SquadV1Processor, SquadV2Processor
+from transformers.trainer import is_apex_available
 
 
 try:
@@ -701,6 +702,9 @@ def main():
         torch.distributed.init_process_group(backend="nccl")
         args.n_gpu = 1
     args.device = device
+
+    if not is_apex_available():
+        args.fp16 = False
 
     # Setup logging
     logging.basicConfig(

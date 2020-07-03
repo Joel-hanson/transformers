@@ -70,7 +70,6 @@ class ExamplesTests(unittest.TestCase):
             --seed=42
             --max_seq_length=128
             --fp16
-            --fp16_opt_level
             """.split()
         with patch.object(sys, "argv", testargs):
             result = run_glue.main()
@@ -96,7 +95,7 @@ class ExamplesTests(unittest.TestCase):
             --do_train
             --do_eval
             --num_train_epochs=1
-            --no_cuda
+            --fp16
             """.split()
         with patch.object(sys, "argv", testargs):
             result = run_language_modeling.main()
@@ -122,6 +121,7 @@ class ExamplesTests(unittest.TestCase):
             --per_gpu_eval_batch_size=1
             --overwrite_output_dir
             --seed=42
+            --fp16
         """.split()
         with patch.object(sys, "argv", testargs):
             result = run_squad.main()
@@ -132,7 +132,7 @@ class ExamplesTests(unittest.TestCase):
         stream_handler = logging.StreamHandler(sys.stdout)
         logger.addHandler(stream_handler)
 
-        testargs = ["run_generation.py", "--prompt=Hello", "--length=10", "--seed=42"]
+        testargs = ["run_generation.py", "--prompt=Hello", "--length=10", "--seed=42", "--fp16"]
         model_type, model_name = ("--model_type=gpt2", "--model_name_or_path=sshleifer/tiny-gpt2")
         with patch.object(sys, "argv", testargs + [model_type, model_name]):
             result = run_generation.main()
