@@ -95,7 +95,6 @@ class ExamplesTests(unittest.TestCase):
             --do_train
             --do_eval
             --num_train_epochs=1
-            --fp16
             """.split()
         with patch.object(sys, "argv", testargs):
             result = run_language_modeling.main()
@@ -121,7 +120,7 @@ class ExamplesTests(unittest.TestCase):
             --per_gpu_eval_batch_size=1
             --overwrite_output_dir
             --seed=42
-            --fp16
+            --no_cuda
         """.split()
         with patch.object(sys, "argv", testargs):
             result = run_squad.main()
