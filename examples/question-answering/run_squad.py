@@ -703,7 +703,7 @@ def main():
         args.n_gpu = 1
     args.device = device
 
-    if "cuda" not in device or not is_apex_available():
+    if "cuda" not in str(args.device) or not is_apex_available():
         args.fp16 = False
 
     # Setup logging
@@ -715,7 +715,7 @@ def main():
     logger.warning(
         "Process rank: %s, device: %s, n_gpu: %s, distributed training: %s, 16-bits training: %s",
         args.local_rank,
-        device,
+        args.device,
         args.n_gpu,
         bool(args.local_rank != -1),
         args.fp16,

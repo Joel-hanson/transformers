@@ -150,7 +150,7 @@ def main():
             f"Output directory ({training_args.output_dir}) already exists and is not empty. Use --overwrite_output_dir to overcome."
         )
 
-    if "cuda" not in training_args.device or not is_apex_available():
+    if "cuda" not in str(training_args.device) or not is_apex_available():
         training_args.fp16 = False
 
     # Setup logging
