@@ -133,6 +133,8 @@ def main():
         cache_dir=model_args.cache_dir,
     )
 
+    if training_args.fp16: model.half()
+
     # Get datasets
     train_dataset = (
         GlueDataset(data_args, tokenizer=tokenizer, cache_dir=model_args.cache_dir) if training_args.do_train else None
