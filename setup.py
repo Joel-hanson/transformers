@@ -65,7 +65,7 @@ if stale_egg_info.exists():
 
 extras = {}
 
-extras["mecab"] = ["mecab-python3<1"]
+extras["ja"] = ["fugashi>=1.0", "ipadic>=1.0,<2.0"]
 extras["sklearn"] = ["scikit-learn"]
 
 # keras2onnx and onnxconverter-common version is specific through a commit until 1.7.0 lands on pypi
@@ -97,11 +97,11 @@ extras["quality"] = [
     "isort @ git+git://github.com/timothycrosley/isort.git@e63ae06ec7d70b06df9e528357650281a3d3ec22#egg=isort",
     "flake8",
 ]
-extras["dev"] = extras["testing"] + extras["quality"] + ["mecab-python3<1", "scikit-learn", "tensorflow", "torch"]
+extras["dev"] = extras["testing"] + extras["quality"] + extras["ja"] + ["scikit-learn", "tensorflow", "torch"]
 
 setup(
     name="transformers",
-    version="3.0.1",
+    version="3.0.2",
     author="Thomas Wolf, Lysandre Debut, Victor Sanh, Julien Chaumond, Sam Shleifer, Patrick von Platen, Google AI Language Team Authors, Open AI team Authors, Facebook AI Authors, Carnegie Mellon University Authors",
     author_email="thomas@huggingface.co",
     description="State-of-the-art Natural Language Processing for TensorFlow 2.0 and PyTorch",
@@ -114,7 +114,7 @@ setup(
     packages=find_packages("src"),
     install_requires=[
         "numpy",
-        "tokenizers == 0.8.0-rc4",
+        "tokenizers == 0.8.1.rc2",
         # dataclasses for Python versions that don't have it
         "dataclasses;python_version<'3.7'",
         # utilities from PyPA to e.g. compare versions
